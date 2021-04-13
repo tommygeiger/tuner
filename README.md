@@ -2,14 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Local Development
+## Local Development
 
 This assumes you have node js installed: 
 ```
 brew install node
 ```
 
-Clone this repo:
+### Clone this repo:
 ```
 git clone https://github.com/tommygeiger/spotify-react-app
 cd spotify-react-app
