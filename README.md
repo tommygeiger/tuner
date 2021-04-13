@@ -15,7 +15,7 @@ git clone https://github.com/tommygeiger/spotify-react-app
 cd spotify-react-app
 ```
 
-You'll need to change `redirectUri` in `src/Config.js` to `http://localhost/3000/`
+You'll need to change `redirectUri` in `src/Config.js` to `http://localhost/3000`
 
 Install dependencies and run:
 ```
@@ -23,4 +23,4 @@ npm install
 npm start
 ```
 
-The app should be live at `http://localhost/3000/`
+The app should be live at `http://localhost/3000`
