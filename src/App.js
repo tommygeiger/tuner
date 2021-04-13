@@ -31,7 +31,6 @@ class App extends Component {
         <br/>
         <h1>Tune<span style={{color: "mediumseagreen"}}>Spot</span></h1>
         <br/>
-        <br/>
         {!this.state.token && (
 
         <a
