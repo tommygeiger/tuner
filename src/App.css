@@ -59,8 +59,8 @@
     text-decoration: none;
     background-color: transparent;
     border-radius: 2em;
-    border: 0.2em solid #1ecd97;
-    color: #1ecd97;
+    border: 0.2em solid mediumseagreen;
+    color: mediumseagreen;
     cursor: pointer;
     font-size: 3vmin;
     padding: 0.7em 1.5em;
@@ -68,7 +68,7 @@
   }
   
   .btn:hover {
-    background: #1ecd97;
+    background: mediumseagreen;
     color: #333;
   }
   
