@@ -9,7 +9,7 @@ This assumes you have node js installed:
 brew install node
 ```
 
-### Clone this repo:
+Clone this repo:
 ```
 git clone https://github.com/tommygeiger/spotify-react-app
 cd spotify-react-app
@@ -22,3 +22,5 @@ Install dependencies and run:
 npm install
 npm start
 ```
+
+The app should be live at `http://localhost/3000/`
