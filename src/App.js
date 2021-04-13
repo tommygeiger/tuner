@@ -1,31 +1,57 @@
-import React from 'react'
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import {AuthContext, Authenticated} from './Auth'
-import Protected from './Protected'
+import React, { Component } from "react";
+import hash from "./Hash";
+import { authEndpoint, clientId, redirectUri, scopes } from "./Config";
+import "./App.css"
+import Recommender from "./Recommender"
 
-const basename = window.location.href.match(/tommygeiger.com/) ? '/spotify-react-app' : undefined
 
-function App() {
-  return (
-    <div style={{ padding: 20 }}>
-      <AuthContext>
-        <Router basename={basename}>
-          <Route path='/'>
-            <div>
-              <Link to='/'>Home</Link>
-              {' '}
-              <Link to='/protected'>Protected</Link>
-            </div>
-          </Route>
-          <Route path='/protected'>
-            <Authenticated>
-              <Protected />
-            </Authenticated>
-          </Route>
-        </Router>
-      </AuthContext>
-    </div>
-  );
+class App extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      token: null,
+    };
+
+  }
+
+  componentDidMount() {
+    let _token = hash.access_token;
+
+    if (_token) {
+      this.setState({
+        token: _token
+      });
+    }
+  }
+
+  render() {
+    return (
+      <div className='App'>
+        <br/>
+        <h1>Tune<span style={{color: "mediumseagreen"}}>Spot</span></h1>
+        <br/>
+        <br/>
+        {!this.state.token && (
+
+        <a
+          className="btn btn--loginApp-link"
+          href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+            "%20"
+          )}&response_type=token&show_dialog=true`}
+        >
+          Log In with Spotify
+        </a>
+
+        )}
+        {this.state.token && (
+
+        <Recommender dataFromParent = {this.state.token} />
+                
+        )}
+      </div>
+    );
+  }
 }
 
 export default App;
