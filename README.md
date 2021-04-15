@@ -9,7 +9,7 @@ This assumes you have node js installed:
 brew install node
 ```
 
-Clone this repo:
+Clone (or fork) this repo:
 ```
 git clone https://github.com/tommygeiger/spotify-react-app
 cd spotify-react-app
