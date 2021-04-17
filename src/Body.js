@@ -1,13 +1,14 @@
 import React from 'react'
+import Search from './Search'
 
-class Recommender extends React.Component {
+class Body extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       error: null,
       isLoaded: false,
       items: [],
-      token: this.props.dataFromParent,
+      token: window.localStorage.getItem('token'),
       seed_track: '',
       min_pop: ''
 
@@ -56,7 +57,7 @@ class Recommender extends React.Component {
             });
           }
         )
-    }
+      }
   }
 
   render() {
@@ -66,28 +67,10 @@ class Recommender extends React.Component {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
       return (
-        <form onSubmit={this.handleSubmit}>
-            <label>
-              Seed Track ID:
-            <input 
-              name="seed_track" 
-              type="text" 
-              value={this.state.seed_track}
-              onChange={this.handleChange} />
-            </label>
-            <br/>
-            <label>
-              Min Popularity (0-100):
-            <input 
-              name="min_pop" 
-              type="text" 
-              value={this.state.min_popularity}
-              onChange={this.handleChange}   />
-            </label>
-            <br/>
-            <input type="submit" value="Submit" />
-          </form>
-      );
+        <div>
+          <Search />
+        </div>
+      )
     } else {
       return (
         <>
@@ -113,6 +96,8 @@ class Recommender extends React.Component {
             <input type="submit" value="Submit" />
           </form>
           <br/>
+
+          //Print reponse from API call
           <ul>
             {items.tracks.map(track => (
               <li>
@@ -126,4 +111,4 @@ class Recommender extends React.Component {
   }
 }
 
-export default Recommender;
+export default Body;
