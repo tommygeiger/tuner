@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { Autocomplete } from '@material-ui/lab'
 import { TextField } from '@material-ui/core'
-import { headers } from './auth'
 
 function Search() {
 
-  // const [query, setQuery] = useState(0)
+  const headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': `Bearer ${document.cookie.split('=')[1]}`
+  }
 
   const [options, setOptions] = useState([])
 
@@ -31,7 +34,7 @@ function Search() {
       <br/>
       <Autocomplete
         options={options}
-        getOptionLabel={(option) => `${option.artist} - ${option.title}`}
+        getOptionLabel={(option) => option}
         renderOption={(option) => (
           <React.Fragment>
             <img src={option.img}></img>
@@ -43,7 +46,7 @@ function Search() {
         autoSelect
         onInputChange={updateOptions}
         filterOptions={(options, state) => options}
-        getOptionSelected={(option, value) => option.title }
+        getOptionSelected={(option, value) => option }
         renderInput={(params) => <TextField {...params} label="Search for Tracks" variant="outlined"/>}
       />
     </div>

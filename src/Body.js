@@ -8,7 +8,7 @@ class Body extends React.Component {
       error: null,
       isLoaded: false,
       items: [],
-      token: window.localStorage.getItem('token'),
+      token: document.cookie.split('=')[1],
       seed_track: '',
       min_pop: ''
 

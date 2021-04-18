@@ -5,17 +5,17 @@ import './App.css'
 
 function App() {
 
-  //Get access token and save to localstorage
-  if (accessToken) { 
-    window.localStorage.setItem('token', accessToken);
+  //Get access token and save to cookie
+  if (accessToken) {
+    document.cookie = `token=${accessToken}; max-age=3600; path=/`;
     window.history.pushState(null, null, ' ');
   }
-  console.log(window.localStorage.getItem('token'));
+  console.log(document.cookie.split('=')[1]);
  
   return (
     <div className="App">
       <Header />
-      { window.localStorage.getItem('token') &&
+      { document.cookie &&
         <Body />
       }
     </div>

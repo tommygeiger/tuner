@@ -14,7 +14,7 @@ function Header() {
         <Typography variant="h6">
           spotify-react-app
         </Typography>
-        { !window.localStorage.getItem('token') &&
+        { !document.cookie &&
           <div className="Right">
             <Login />
           </div>
