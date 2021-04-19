@@ -41,7 +41,7 @@ function Search() {
       <br/>
       <Autocomplete
         options={options}
-        getOptionLabel={(option) => option.title}
+        getOptionLabel={(option) => `${option.artist} - ${option.title}`}
         renderOption={(option) => (
           <React.Fragment>
             <img src={option.img} width={32} height={32}></img>
