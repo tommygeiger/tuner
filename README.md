@@ -15,7 +15,7 @@ git clone https://github.com/tommygeiger/spotify-react-app
 cd spotify-react-app
 ```
 
-You'll need to change `redirectUri` in `src/auth.js` to `http://localhost/3000/`
+Make sure `redirectUri` in `src/auth.js` is set to `http://localhost/3000/`
 
 Install dependencies and run:
 ```
