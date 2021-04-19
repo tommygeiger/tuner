@@ -17,7 +17,7 @@ cd spotify-react-app
 
 Make sure `redirectUri` in `src/auth.js` is set to `http://localhost/3000/`
 
-Install dependencies and run:
+Install dependencies and start:
 ```
 npm install
 npm start
