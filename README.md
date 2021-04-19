@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Local Development
 
-This assumes you have node js installed: 
+This assumes you have node js installed, if you don't:
 ```
 brew install node
 ```
