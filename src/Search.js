@@ -10,6 +10,8 @@ function Search() {
     'Authorization': `Bearer ${document.cookie.split('=')[1]}`
   }
 
+  console.log(document.cookie.split('=')[1])
+
   const [options, setOptions] = useState([])
 
   function updateOptions(event, value, reason) {
@@ -19,8 +21,13 @@ function Search() {
         .then(response => response.json())
         .then(
           (result) => {
-            console.log(result.tracks.items.map(track => ({title:track.name, artist:track.artists[0].name, img:track.album.images.slice(-1)[0].url})))
-            setOptions(result.tracks.items.map(track => ({title:track.name, artist:track.artists[0].name, img:track.album.images.slice(-1)[0].url})))
+            console.log(result.tracks.items.map(track => ({title:track.name, artist:track.artists[0].name, explicit:track.explicit})))
+            setOptions(result.tracks.items.map(track => ({
+              title:track.name, 
+              artist:track.artists[0].name, 
+              img:track.album.images.slice(-1)[0].url,
+              explicit:track.explicit
+            })))
           }
         )
         .catch(error => {
@@ -34,11 +41,14 @@ function Search() {
       <br/>
       <Autocomplete
         options={options}
-        getOptionLabel={(option) => option}
+        getOptionLabel={(option) => option.title}
         renderOption={(option) => (
           <React.Fragment>
-            <img src={option.img}></img>
+            <img src={option.img} width={32} height={32}></img>
+            &nbsp;
             {option.artist} - {option.title}
+            &nbsp;
+            {option.explicit && <span style={{fontSize:'.75em',fontWeight:'bold',color:'red'}}>E</span>}
           </React.Fragment>
         )}
         fullWidth

@@ -31,7 +31,7 @@ class Body extends React.Component {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': `Bearer ${this.state.token}`
+      'Authorization': `Bearer ${document.cookie.split('=')[1]}`
     }
 
     console.log(this.state.seed_track);

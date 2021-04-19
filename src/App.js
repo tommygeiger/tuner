@@ -7,7 +7,7 @@ function App() {
 
   //Get access token and save to cookie
   if (accessToken) {
-    document.cookie = `token=${accessToken}; max-age=3600; path=/`;
+    document.cookie = `access-token=${accessToken}; max-age=3600; path=/`;
     window.history.pushState(null, null, ' ');
   }
   console.log(document.cookie.split('=')[1]);
