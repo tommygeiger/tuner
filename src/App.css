@@ -7,5 +7,6 @@
 }
 
 .SearchBar {
+  margin: 20px;
   flex: auto;
 }

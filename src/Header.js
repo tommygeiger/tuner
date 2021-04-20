@@ -2,6 +2,9 @@ import { AppBar, Toolbar, Typography, } from '@material-ui/core'
 import Login from './Login'
 import './App.css'
 
+/*
+ * Header.js is responsible for displaying the header / navbar
+ */
 function Header() {
 
   const style = {

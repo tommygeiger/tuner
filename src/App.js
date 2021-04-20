@@ -1,8 +1,12 @@
 import Body from './Body'
 import Header from './Header'
+import LandingPage from './LandingPage'
 import { accessToken } from './auth'
 import './App.css'
 
+/*
+ * App.js is the outwermost React compenent, responsible for rendering all other components
+ */
 function App() {
 
   //Get access token and save to cookie
@@ -14,10 +18,15 @@ function App() {
  
   return (
     <div className="App">
+      
       <Header />
+
       { document.cookie &&
         <Body />
+      }{ !document.cookie &&
+        <LandingPage />
       }
+
     </div>
   )
 }
