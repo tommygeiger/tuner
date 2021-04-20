@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Local Development
 
-This assumes you have node js installed: 
+This assumes you have node js installed, if you don't:
 ```
 brew install node
 ```
@@ -17,7 +17,7 @@ cd spotify-react-app
 
 Make sure `redirectUri` in `src/auth.js` is set to `http://localhost/3000/`
 
-Install dependencies and run:
+Install dependencies and start:
 ```
 npm install
 npm start
