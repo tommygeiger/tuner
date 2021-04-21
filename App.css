@@ -1,0 +1,12 @@
+.App {
+  text-align: center;
+}
+
+.Right {
+  margin-left: auto;
+}
+
+.SearchBar {
+  margin: 20px;
+  flex: auto;
+}
