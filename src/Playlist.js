@@ -1,14 +1,18 @@
 import { useContext, useState } from 'react'
 import { SearchContext } from './SearchContext'
 import Button from '@material-ui/core/Button'
+import PlaylistElement from './PlaylistElement'
 
-const headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json',
-  'Authorization': `Bearer ${document.cookie.split('=')[1]}`
-}
-
+/*
+ * Playlist.js fetches and renders the recommendations api query
+ */
 function Playlist() {
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': `Bearer ${document.cookie.split('=')[1]}`
+  }
 
   const { params, setParams } = useContext(SearchContext);
   const [playlist, setPlaylist] = useState()
@@ -41,7 +45,7 @@ function Playlist() {
   return (
     <div>
         {/* This button calls the above function on click */}
-        <Button variant="contained" onClick={fetchPlaylist}>
+        <Button color="primary" variant="contained" onClick={fetchPlaylist}>
           Go
         </Button>
 
@@ -49,14 +53,8 @@ function Playlist() {
         {/* The playlist only gets rendered if it had been set */}
         { playlist &&
           <div>
-          {playlist.map(option => (
-            <p>
-              <img src={option.img} width={32} height={32} alt="album artwork"></img>
-              &nbsp;
-              {option.artist} - {option.title}
-              &nbsp;
-              {option.explicit && <span style={{fontSize:'.75em',fontWeight:'bold',color:'red'}}>E</span>}
-            </p>
+          { playlist.map(option => (
+            <PlaylistElement track={option}/>
           ))}
           </div>
         }

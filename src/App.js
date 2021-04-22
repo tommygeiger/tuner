@@ -5,7 +5,7 @@ import { accessToken } from './auth'
 import './App.css'
 
 /*
- * App.js is the outwermost React compenent, responsible for rendering all other components
+ * App.js is the outermost React compenent, responsible for rendering all other components
  */
 function App() {
 
@@ -18,7 +18,7 @@ function App() {
  
   return (
     <div className="App">
-      
+
       <Header />
 
       { document.cookie &&

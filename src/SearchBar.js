@@ -3,16 +3,16 @@ import { Autocomplete } from '@material-ui/lab'
 import { TextField } from '@material-ui/core'
 import { SearchContext } from './SearchContext'
 
-const headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json',
-  'Authorization': `Bearer ${document.cookie.split('=')[1]}`
-}
-
 /*
  * Search.js is responsible for the dynamic search bar
  */
 function SearchBar() {
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': `Bearer ${document.cookie.split('=')[1]}`
+  }
 
   const [options, setOptions] = useState([])
   const { params, setParams } = useContext(SearchContext);
@@ -63,7 +63,7 @@ function SearchBar() {
           filterOptions={(options, state) => options}
           getOptionSelected={(option, value) => option }
           renderInput={(params) => <TextField {...params} label="Search for Tracks" variant="outlined"/>}
-          onChange={(event, value) => setParams(value.id)}
+          onChange={(event, value) => { if(value){setParams(value.id)} }}
         />
       </div>
   )
