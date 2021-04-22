@@ -8,11 +8,17 @@ const headers = {
   'Authorization': `Bearer ${document.cookie.split('=')[1]}`
 }
 const customStyle = {
-  backgroundColor: "#28df99",
-  borderRadius: "25px"
+  backgroundColor: "#2AB859",
+  borderRadius: "25px",
+  borderRadius: "25px",
+  width: "50%",
+  marginLeft: "auto",
+  marginRight: "auto",
+  borderStyle: "solid"
+
 
 };
-
+var a =0;
 const rule = {
   width: "50%",
   color: "black",
@@ -31,7 +37,21 @@ const hStyle = {
 const imgStyle={
  position: "relative",
  top: "10px",
- right: "10px"
+ right: "10px",
+ borderRadius: "50%"
+};
+
+const pStyle={
+    color: "black",
+    backgroundColor: "#fde8cd",
+    height: "50px",
+    width: "70%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    borderRadius: "25px",
+    fontWeight: "bold",
+    borderStyle: "solid"
+
 };
 
 function Playlist() {
@@ -47,13 +67,16 @@ function Playlist() {
         .then(response => response.json())
         .then(
           (result) => {
+              console.log(result);
             //This just parses the returned json
             setPlaylist(result.tracks.map(track => ({
+            ext_url:track.artists[0].external_urls.spotify,
               title:track.name,
               artist:track.artists[0].name,
               img:track.album.images.slice(-1)[0].url,
-              
+              disc_num:track.disc_number,
               explicit:track.explicit,
+            
               id:track.id
             })))
           },
@@ -79,10 +102,14 @@ function Playlist() {
           <h1 style={hStyle}> Here is your playlist: </h1>
            <hr color="black" style={rule} />
           {playlist.map(option => (
-            <p>
+            <p style={pStyle}>
+            &nbsp;
+            <a href ={option.ext_url} target="blank">
               <img src={option.img} style={imgStyle} width={32} height={32} alt="album artwork"></img>
+              </a>
               &nbsp;
               {option.artist} - {option.title}
+
               &nbsp;
               {option.explicit && <span style={{fontSize:'.75em',fontWeight:'bold',color:'red'}}>E</span>}
             </p>
