@@ -7,8 +7,6 @@ import './index.css'
 index.js plugs App.js into index.html
 */
 ReactDOM.render(
-  <React.StrictMode>
-    <App /> 
-  </React.StrictMode>,
+  <App />,
   document.getElementById('root')
 )

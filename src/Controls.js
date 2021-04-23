@@ -1,13 +1,29 @@
-import { useContext } from 'react'
-import { SearchContext } from './SearchContext'
+import ParamSlider from './ParamSlider'
+import './App.css'
 
 function Controls() {
 
-  const { params, setParams } = useContext(SearchContext);
-
+  // acousticness:null,
+  // danceability:null,
+  // energy:null,
+  // instumentalness:null,
+  // liveness:null,
+  // loudness:null,
+  // popularity:null,
+  // tempo:null,
+  // valence:null
+  
   return (
-    <div>
-      <h3>Controls go here</h3>
+    <div className="Controls">
+      <ParamSlider param="acousticness"/>
+      <ParamSlider param="danceability"/>
+      <ParamSlider param="energy"/>
+      <ParamSlider param="instrumentalness"/>
+      <ParamSlider param="liveness"/>
+      <ParamSlider param="loudness"/>
+      <ParamSlider param="popularity"/>
+      <ParamSlider param="tempo"/>
+      <ParamSlider param="valence"/>
     </div>
   )
 }

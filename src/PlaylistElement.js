@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import Button from '@material-ui/core/Button'
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import Box from '@material-ui/core/Box'
+import './App.css'
+import { Typography } from '@material-ui/core';
 
 function PlaylistElement(props) {
 
@@ -51,17 +54,24 @@ function PlaylistElement(props) {
   }
 
   return (
-    <div key={option.title}>
-      <img src={option.img} width={32} height={32} alt="album artwork"></img>
-      &nbsp;
-      {option.artist} - {option.title}
-      &nbsp;
-      {option.explicit && <span style={{fontSize:'.75em',fontWeight:'bold',color:'red'}}>E</span>}
-      &nbsp;
+    <div className="PlaylistElement" style={{backgroundColor:props.color, borderRadius:10, paddingLeft:10}}>
+      <Box key={option.title} display="flex" style={{alignItems:"center"}}>
 
-      <Button color="secondary" variant="contained" onClick={playTrack}>
-        <PlayArrowIcon/>
-      </Button>      
+        <img src={option.img} width={40} height={40} alt="album artwork" style={{borderRadius:"50%"}}></img>
+        <Typography>
+          &nbsp;
+          {option.artist} - {option.title}
+          &nbsp;
+          {option.explicit && <span style={{fontSize:'.75em',fontWeight:'bold',color:'red'}}>E</span>}
+        </Typography>
+        <div className="Right">
+        <Button
+          onClick={playTrack}>
+          <PlayCircleOutlineIcon/>
+        </Button>
+        </div>
+
+      </Box>
     </div>
   )
 }

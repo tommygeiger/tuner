@@ -1,5 +1,6 @@
 import Body from './Body'
 import Header from './Header'
+import Footer from './Footer'
 import LandingPage from './LandingPage'
 import { accessToken } from './auth'
 import './App.css'
@@ -18,15 +19,13 @@ function App() {
  
   return (
     <div className="App">
-
       <Header />
-
-      { document.cookie &&
+      { document.cookie ?
         <Body />
-      }{ !document.cookie &&
+      :
         <LandingPage />
       }
-
+      <Footer />
     </div>
   )
 }

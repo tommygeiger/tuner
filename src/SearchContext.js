@@ -1,9 +1,9 @@
 import React from 'react'
 
 export const defaultParams = {
-  seed_tracks:[],
-  seed_artists:[],
-  seed_albums:[],
+  seed_tracks:null,
+  seed_artists:null,
+  seed_albums:null,
   acousticness:null,
   danceability:null,
   energy:null,
@@ -15,6 +15,6 @@ export const defaultParams = {
   valence:null
 }
 export const SearchContext = React.createContext({
-  params: '',
+  params: defaultParams,
   setParams: () => {}
 })

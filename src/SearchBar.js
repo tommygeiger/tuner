@@ -18,22 +18,41 @@ function SearchBar() {
   const { params, setParams } = useContext(SearchContext);
 
   function updateOptions(event, value, reason) {
-    console.log(`https://api.spotify.com/v1/search?q=${value.split(' ').join('%20')}&type=track&limit=5`)
 
     if (value && value!=='') {
 
-      fetch(`https://api.spotify.com/v1/search?q=${value.split(' ').join('%20')}&type=track&limit=5`, { headers })
+      fetch(`https://api.spotify.com/v1/search?q=${value.split(' ').join('%20')}&type=track,album,artist&limit=5`, { headers })
         .then(response => response.json())
         .then(
           (result) => {
-            console.log(result.tracks.items.map(track => ({title:track.name, artist:track.artists[0].name, explicit:track.explicit})))
-            setOptions(result.tracks.items.map(track => ({
-              title:track.name, 
-              artist:track.artists[0].name, 
-              img:track.album.images.slice(-1)[0].url,
+
+            //Parse the json into albums, tracks, artists
+            const albums = result.albums.items.map(album => ({
+              type:'Albums',
+              name:album.name,
+              artists:album.artists.map(artist => artist.name).join(', '),
+              img:(album.images.length ? album.images.slice(-1)[0].url : null),
+              id:album.id
+            }))
+            const artists = result.artists.items.map(artist => ({
+              type:'Artists',
+              artists:artist.name,
+              img:(artist.images.length ? artist.images.slice(-1)[0].url : null),
+              id:artist.id
+            }))
+            const tracks = result.tracks.items.map(track => ({
+              type:'Tracks',
+              name:track.name,
+              artists:track.artists.map(artist => artist.name).join(', '),
+              img:(track.album.images.length ? track.album.images.slice(-1)[0].url : null),
               explicit:track.explicit,
               id:track.id
-            })))
+            }))
+            
+            //console.log(result)
+            //console.log('Destructured:',[...albums, ...artists, ...tracks])
+            setOptions([...tracks, ...albums, ...artists])
+
           }
         )
         .catch(error => {
@@ -47,14 +66,15 @@ function SearchBar() {
       <div className="SearchBar">
         <Autocomplete
           options={options}
-          getOptionLabel={(option) => `${option.artist} - ${option.title}`}
+          getOptionLabel={(option) => `${option.name ? `${option.name} - ` : ''}${option.artists}` }
           renderOption={(option) => (
             <React.Fragment>
-              <img src={option.img} width={32} height={32} alt="album artwork"></img>
+              { option.img && <img src={option.img} width={32} height={32} alt="album artwork"></img> }
               &nbsp;
-              {option.artist} - {option.title}
+              { option.name && <span>{option.name} -&nbsp;</span> } 
+              {option.artists}
               &nbsp;
-              {option.explicit && <span style={{fontSize:'.75em',fontWeight:'bold',color:'red'}}>E</span>}
+              { option.explicit && <span style={{fontSize:'.75em',fontWeight:'bold',color:'red'}}>E</span> }
             </React.Fragment>
           )}
           autoHighlight
@@ -62,8 +82,30 @@ function SearchBar() {
           onInputChange={updateOptions}
           filterOptions={(options, state) => options}
           getOptionSelected={(option, value) => option }
-          renderInput={(params) => <TextField {...params} label="Search for Tracks" variant="outlined"/>}
-          onChange={(event, value) => { if(value){setParams(value.id)} }}
+          renderInput={(params) => <TextField {...params} label="Start with a track, album or artist" variant="outlined"/>}
+          onChange={(event, value) => { 
+            //Set the seed values
+            if (value) {
+              switch (value.type){
+                case 'Tracks':
+                  params.seed_tracks = value.id
+                  params.seed_albums = null
+                  params.seed_artists = null
+                  break
+                case 'Albums':
+                  params.seed_tracks = null
+                  params.seed_albums = value.id
+                  params.seed_artists = null
+                  break
+                case 'Artists':
+                  params.seed_tracks = null
+                  params.seed_albums = null
+                  params.seed_artists = value.id
+                  break
+              }
+            }
+          }}
+          groupBy={(option) => option.type}
         />
       </div>
   )

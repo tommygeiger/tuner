@@ -6,7 +6,26 @@
   margin-left: auto;
 }
 
-.SearchBar {
-  margin: 20px;
-  flex: auto;
+.Body {
+  padding: 20px;
+}
+
+.Controls {
+  padding: 40px;
+  padding-top: 10px;
+  padding-bottom: 0px;
+}
+
+.Playlist {
+  padding: 60px;
+  padding-top: 10px;
+}
+
+.PlaylistElement {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.Footer {
+  padding: 10px;
 }
