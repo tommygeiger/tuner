@@ -1,6 +1,6 @@
-# [Spotify React App](https://tommygeiger.com/spotify-react-app)
+# Spotify React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It's currently live [here](https://tommygeiger.com/spotify-react-app)!
 
 ## Local Development
 
