@@ -1,6 +1,7 @@
 # Spotify React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It's currently live [here](https://tommygeiger.com/spotify-react-app)!
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). 
+Currently live (under construction) [here](https://tommygeiger.com/spotify-react-app).
 
 ## Local Development
 
