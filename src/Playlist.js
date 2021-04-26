@@ -1,14 +1,15 @@
-import { useContext, useState } from 'react'
+import { Fragment, useContext, useState } from 'react'
 import { SearchContext } from './SearchContext'
-import { Button, Box, IconButton, Tooltip } from '@material-ui/core'
+import { Button, Box, IconButton, Tooltip, Snackbar } from '@material-ui/core'
 import Skeleton from '@material-ui/lab/Skeleton'
 import PlaylistElement from './PlaylistElement'
 import SaveAltOutlinedIcon from '@material-ui/icons/SaveAltOutlined'
+import CloseIcon from '@material-ui/icons/Close'
 import './App.css'
 
 
 const sayings = [
-  "Girl, put your records on",
+  "Girl put your records on",
   "Pump up the jam",
   "Fly me to the moon",
   "Hit me baby one more time",
@@ -58,6 +59,15 @@ function Playlist() {
   const [playlist, setPlaylist] = useState()
   const [buttonText, setButtonText] = useState(sayings[Math.floor(Math.random() * sayings.length)])
   const colors = ['#e6e6e6a0', '#ffffff00']
+  const [open, setOpen] = useState(false);
+
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   //Function to fetch recommendations via the api
   function fetchPlaylist() {
@@ -141,6 +151,7 @@ function Playlist() {
             console.error('Error:', error);
           }
         )
+        .then(setOpen(true))
 
   }
 
@@ -182,8 +193,27 @@ function Playlist() {
           ))}
           </div>
         ) : (
-          [...Array(10)].map(() => <Skeleton height={90} animation={false}/>)                
+          [...Array(10)].map((elem,index) => <Skeleton key={index} height={90} animation={false}/>)                
         )}
+
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center'
+          }}
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          message="Playlist created!"
+          action={
+            <Fragment>
+              <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </Fragment>
+          }
+          />
+
     </div>
   )
   

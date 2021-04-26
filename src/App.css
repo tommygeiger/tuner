@@ -50,7 +50,8 @@
   rgba(0, 0, 0, 0.3) 0px 0px 20px -20px inset,
   rgba(50, 50, 100, 0.5) 0px 0px 100px -10px,
   rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-  rgba(0, 0, 0, 0.2) 0px 0px 5px 1px inset;
+  rgba(0, 0, 0, 0.2) 0px 0px 5px 1px inset,
+  rgba(0, 0, 0, 0.1) 0px 0px 2px 1px inset;
 }
 
 .Title {

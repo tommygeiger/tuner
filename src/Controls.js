@@ -1,6 +1,7 @@
 import ParamSlider from './ParamSlider'
 import './App.css'
 
+
 function Controls() {
 
   // acousticness:null,
@@ -12,27 +13,32 @@ function Controls() {
   // popularity:null,
   // tempo:null,
   // valence:null
-  
+
   return (
     <div className="Controls">
-      <ParamSlider param="acousticness"
+      <ParamSlider
+        param="acousticness"
         description="How acoustic sounding a track is. Higher values mean 
         fewer electric instruments, like synthesizers and electric guitars."/>
-      <ParamSlider param="danceability"
+      <ParamSlider 
+        param="danceability"
         description="Does that song make you want to dance? If yes, it's danceable.
         Higher values mean more dancable tracks."/>
-      <ParamSlider param="energy"
+      <ParamSlider 
+        param="energy"
         description="Some songs are perfect for pregames, while others are more
         suited for a dinner party. Higher values mean more energetic songs, while lower
         values means calmer ones."/>
       {/* <ParamSlider param="instrumentalness"/>
       <ParamSlider param="liveness"/> */}
       {/* <ParamSlider param="loudness"/> */}
-      <ParamSlider param="popularity"
+      <ParamSlider 
+        param="popularity"
         description="An objective measurement of popularity on Spotify. Use low values 
         to hipster-fy your playlist."/>
       {/* <ParamSlider param="tempo"/> */}
-      <ParamSlider param="valence"
+      <ParamSlider 
+        param="valence"
         description="Valence measures how happy or sad a song is. High values
         mean happier songs, while low values mean sad boi songs."/>
     </div>

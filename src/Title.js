@@ -14,7 +14,7 @@ function Title() {
         
         <Box m={-2}>
           <Typography variant="caption">
-            a better playlist generator
+            a playlist generator
           </Typography>
         </Box>
       </Box>
