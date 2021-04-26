@@ -8,28 +8,32 @@ function App() {
 
   //Get access token and save to cookie
   if (accessToken) {
-    document.cookie = `access-token=${accessToken}; max-age=3600; path=/`;
-    window.history.pushState(null, null, ' ');
+    //Use callback so it's synced
+    setAccessToken(accessToken, setUserId)
+  }
 
+  function setAccessToken(token, callback) {
+    document.cookie = `access-token=${token}; max-age=3500; path=/`
+    window.history.pushState(null, null, ' ')
+    callback(token)
+  }
+
+  function setUserId(token){
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': `Bearer ${document.cookie.split('=')[1].split(';')[0]}`
+      'Authorization': `Bearer ${token}`
     }
-
     //Store User ID
     fetch("https://api.spotify.com/v1/me", { headers })
     .then(response => response.json())
     .then(
       (result) => {
         //Set cookie
-        document.cookie = `user-id=${result.id}; max-age=3600; path=/`;
+        document.cookie = `user-id=${result.id}; max-age=3500; path=/`
       },
-      (error) => {
-        console.error('Error:', error);
-      }
+      (error) => { console.error('Error:', error) }
     )
-
   }
 
   console.log(document.cookie);
