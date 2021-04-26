@@ -1,73 +1,81 @@
-import React, { useContext } from 'react'
-import Slider from '@material-ui/core/Slider'
-import Tooltip from '@material-ui/core/Tooltip'
-import PropTypes from 'prop-types'
-import { Typography } from '@material-ui/core'
-import Switch from '@material-ui/core/Switch'
-import Box from '@material-ui/core/Box'
+import React, { useContext, useState } from 'react'
+import { Typography, withStyles, Slider, Tooltip, IconButton, Box, Switch } from '@material-ui/core'
 import { SearchContext } from './SearchContext'
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
 
-function ValueLabelComponent(props) {
-  const { children, open, value } = props;
-  return (
-    <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
-      {children}
-    </Tooltip>
-  );
-}
-
-ValueLabelComponent.propTypes = {
-  children: PropTypes.element.isRequired,
-  open: PropTypes.bool.isRequired,
-  value: PropTypes.number.isRequired,
-};
+const ParamTip = withStyles(() => ({
+  tooltip: {
+    backgroundColor: '#ffffff',
+    color: "#000000",
+    maxWidth: 400,
+    fontSize: ".75em",
+  },
+}))(Tooltip);
 
 
 function ParamSlider(props) {
-
   const { params, setParams } = useContext(SearchContext);
-  const [state, setState] = React.useState({checked: false, value: 50});
+  const [state, setState] = useState({checked: false, value: 50});
+  const [nothing, doNothing] = useState(null)
 
-  const handleChange = (event) => {
-    
-    //Set param to null
+  function handleChange() {
+    //Handle when the switch is checked/unchecked
     (state.checked ? 
       params[props.param] = null
     :
       params[props.param] = state.value
     )
-
-    setState({ ...state, [event.target.name]: event.target.checked })
-    console.log(params)
-
-  };
+    
+    setState({checked:!state.checked, value:state.value})
+  }
 
   return (
-      <Box display="flex" style={{alignItems:"center"}}>
+      <Box display="flex" style={{alignItems:"center", paddingTop:5, paddingRight:20, paddingLeft:5}}>
+          
+        <ParamTip 
+          interactive
+          title={props.description}
+          placement="right">
+          <IconButton style={{height:'.75em', width:'.75em'}}>
+            <InfoOutlinedIcon style={{height:'.75em', width:'.75em'}} />
+          </IconButton>
+        </ParamTip>
+        
+          <Typography
+            variant="subtitle1" 
+            style={{minWidth:110, textAlign:"left", textTransform: "capitalize"}}>
+             {props.param}
+          </Typography>
 
-        <Typography style={{width:180, textAlign:"left", textTransform: "capitalize"}}>{props.param}</Typography>
+              
+        <div style={{paddingRight:20}}>
+          <Switch
+            size="small"
+            color="primary"
+            checked={state.checked}
+            onChange={handleChange}
+            name="checked"
+            inputProps={{ 'aria-label': 'Checkbox' }}
+          />
+        </div>
 
-        <Switch
-          color="primary"
-          checked={state.checked}
-          onChange={handleChange}
-          name="checked"
-          inputProps={{ 'aria-label': 'Checkbox' }}
-        />
+        <>
+          
+          <Slider
+            color="primary"
+            disabled={!state.checked}
+            valueLabelDisplay="auto"
+            aria-label={props.param}
+            defaultValue={50}
+            onChangeCommitted={(event, value) => {
+              params[props.param] = value
+              setState({checked:state.checked, value:value})
+              doNothing()
+            }}
+          ><span>{nothing}</span></Slider>
+        </>
 
-        <Slider
-          color="primary"
-          disabled={!state.checked}
-          ValueLabelComponent={ValueLabelComponent}
-          aria-label="Value"
-          defaultValue={50}
-          onChange={(event, value) => {
-            setState({checked:state.checked, value:value})
-            params[props.param] = value
-            console.log(params)
-          }}
-        />
       </Box>    
   );
   

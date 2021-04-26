@@ -11,7 +11,7 @@ function SearchBar() {
   const headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Authorization': `Bearer ${document.cookie.split('=')[1]}`
+    'Authorization': `Bearer ${document.cookie.split('=')[1].split(';')[0]}`
   }
 
   const [options, setOptions] = useState([])
@@ -21,19 +21,11 @@ function SearchBar() {
 
     if (value && value!=='') {
 
-      fetch(`https://api.spotify.com/v1/search?q=${value.split(' ').join('%20')}&type=track,album,artist&limit=5`, { headers })
+      fetch(`https://api.spotify.com/v1/search?q=${value.split(' ').join('%20')}&type=track,artist&limit=5`, { headers })
         .then(response => response.json())
         .then(
           (result) => {
 
-            //Parse the json into albums, tracks, artists
-            const albums = result.albums.items.map(album => ({
-              type:'Albums',
-              name:album.name,
-              artists:album.artists.map(artist => artist.name).join(', '),
-              img:(album.images.length ? album.images.slice(-1)[0].url : null),
-              id:album.id
-            }))
             const artists = result.artists.items.map(artist => ({
               type:'Artists',
               artists:artist.name,
@@ -49,9 +41,7 @@ function SearchBar() {
               id:track.id
             }))
             
-            //console.log(result)
-            //console.log('Destructured:',[...albums, ...artists, ...tracks])
-            setOptions([...tracks, ...albums, ...artists])
+            setOptions([...tracks, ...artists])
 
           }
         )
@@ -79,28 +69,24 @@ function SearchBar() {
           )}
           autoHighlight
           autoSelect
+          noOptionsText="Search for Artists or Tracks..."
           onInputChange={updateOptions}
           filterOptions={(options, state) => options}
           getOptionSelected={(option, value) => option }
-          renderInput={(params) => <TextField {...params} label="Start with a track, album or artist" variant="outlined"/>}
+          renderInput={(params) => <TextField {...params} label="Start with an Artist or Track" variant="outlined"/>}
           onChange={(event, value) => { 
             //Set the seed values
             if (value) {
               switch (value.type){
                 case 'Tracks':
                   params.seed_tracks = value.id
-                  params.seed_albums = null
-                  params.seed_artists = null
-                  break
-                case 'Albums':
-                  params.seed_tracks = null
-                  params.seed_albums = value.id
                   params.seed_artists = null
                   break
                 case 'Artists':
                   params.seed_tracks = null
-                  params.seed_albums = null
                   params.seed_artists = value.id
+                  break
+                default:
                   break
               }
             }

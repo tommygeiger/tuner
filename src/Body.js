@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import SearchBar from './SearchBar'
 import Playlist from './Playlist'
 import Controls from './Controls'
+import Title from './Title'
 import { SearchContext, defaultParams } from './SearchContext'
 import './App.css'
 
@@ -14,13 +15,14 @@ function Body() {
   const value = { params, setParams }
 
   return (
-    <div className="Body">
-      <SearchContext.Provider value={value}>
-        <SearchBar />
-        <Controls />
-        <Playlist />
-      </SearchContext.Provider>
-    </div>
+      <div className="Body">
+        <SearchContext.Provider value={value}>
+          <Title />
+          <SearchBar />
+          <Controls />
+          <Playlist />
+        </SearchContext.Provider>
+      </div>
   )
 }
 

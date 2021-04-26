@@ -1,10 +1,27 @@
+import Login from './Login'
+import Title from './Title'
+import Footer from './Footer'
+import { Box } from '@material-ui/core'
+
 
 function LandingPage() {
 
   return (
-    <div>
-      <h1>Landing page</h1>
-    </div>
+    <Box display="flex" justifyContent="center" alignItems="center">
+      <div className="LandingPage">          
+
+          <div className="Middle">
+            <Title />
+            <br/><br/>
+            <Login />
+          </div>
+          
+          <div className="Bottom">
+            <Footer />
+          </div>
+           
+      </div>
+    </Box>
   )
 }
 

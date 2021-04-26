@@ -3,7 +3,6 @@ import React from 'react'
 export const defaultParams = {
   seed_tracks:null,
   seed_artists:null,
-  seed_albums:null,
   acousticness:null,
   danceability:null,
   energy:null,
