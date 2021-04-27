@@ -21,6 +21,4 @@ We use cookies to enable Spotify API requests after authentication. When you use
 
 We don't use third-party cookies.
 
-## Learn more
-
-AllAboutCookies: http://www.allaboutcookies.org/
+### [Learn more](http://www.allaboutcookies.org/)
