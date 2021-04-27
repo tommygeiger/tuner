@@ -7,10 +7,10 @@ export const defaultParams = {
   danceability:null,
   energy:null,
   instumentalness:null,
-  liveness:null,
-  loudness:null,
+  // liveness:null,
+  // loudness:null,
   popularity:null,
-  tempo:null,
+  // tempo:null,
   valence:null
 }
 export const SearchContext = React.createContext({

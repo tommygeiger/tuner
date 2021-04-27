@@ -1,8 +1,9 @@
 import { Box, Typography } from '@material-ui/core'
-import logo from './assets/spotify_logo_black.png'
+import logo_text from './assets/logo_text.png'
+import logo_icon from './assets/logo_icon.png'
 import './App.css'
 
-function Title() {
+function Title(props) {
 
   return (
     <Box display="flex" flexWrap="wrap" justifyContent="center" alignItems="center">
@@ -19,14 +20,18 @@ function Title() {
         </Box>
       </Box>
       
-      <Box px={4} mt={3}>
+      <Box px={3} mt={3}>
         <Typography variant="subtitle2">
           for        
         </Typography>
       </Box>
       
       <Box mt={3}>
-        <img src={logo} width={236} height={70} alt="spotify logo"/>
+        {props.variant==="text" ?
+          <img src={logo_text} width={236} height={70} alt="spotify logo"/>
+        :
+          <img src={logo_icon} width={70} height={70} alt="spotify logo"/>
+        }
       </Box>
     </Box>
   )

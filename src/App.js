@@ -8,14 +8,14 @@ function App() {
 
   //Get access token and save to cookie
   if (accessToken) {
-    //Use callback so it's synced
-    setAccessToken(accessToken, setUserId)
+    //These happen asynchronously!
+    setAccessToken(accessToken)
+    setUserId(accessToken)
   }
 
-  function setAccessToken(token, callback) {
+  function setAccessToken(token) {
     document.cookie = `access-token=${token}; max-age=3500; path=/`
     window.history.pushState(null, null, ' ')
-    callback(token)
   }
 
   function setUserId(token){

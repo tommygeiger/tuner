@@ -29,12 +29,15 @@ function Controls() {
         description="Some songs are perfect for pregames, while others are more
         suited for a dinner party. Higher values mean more energetic songs, while lower
         values means calmer ones."/>
-      {/* <ParamSlider param="instrumentalness"/>
-      <ParamSlider param="liveness"/> */}
+      <ParamSlider 
+        param="instrumentalness"
+        description="High values for instrumentalness find songs with few vocals, while
+        lower values mean songs with more vocals."/>
+      {/* <ParamSlider param="liveness"/> */}
       {/* <ParamSlider param="loudness"/> */}
       <ParamSlider 
         param="popularity"
-        description="An objective measurement of popularity on Spotify. Use low values 
+        description="An objective measurement of current popularity on Spotify. Use low values 
         to hipster-fy your playlist."/>
       {/* <ParamSlider param="tempo"/> */}
       <ParamSlider 

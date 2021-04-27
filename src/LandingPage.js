@@ -11,7 +11,7 @@ function LandingPage() {
       <div className="LandingPage">          
 
           <div className="Middle">
-            <Title />
+            <Title variant="text"/>
             <br/><br/>
             <Login />
           </div>

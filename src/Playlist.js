@@ -52,10 +52,10 @@ function Playlist() {
   const headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Authorization': `Bearer ${document.cookie.split('=')[1].split(';')[0]}`
+    'Authorization': `Bearer ${document.cookie.split('access-token=')[1].split(';')[0]}`
   }
 
-  const { params, setParams } = useContext(SearchContext)
+  const { params } = useContext(SearchContext)
   const [playlist, setPlaylist] = useState()
   const [buttonText, setButtonText] = useState(sayings[Math.floor(Math.random() * sayings.length)])
   const colors = ['#e6e6e6a0', '#ffffff00']
@@ -82,15 +82,12 @@ function Playlist() {
       `${params.acousticness ? `&target_acousticness=${params.acousticness}` : ''}` +
       `${params.danceability ? `&target_danceability=${params.danceability}` : ''}` +
       `${params.energy ? `&target_energy=${params.energy}` : ''}` +
-      `${params.instumentalness ? `&target_instumentalness=${params.instumentalness}` : ''}` +
-      `${params.liveness ? `&target_liveness=${params.liveness}` : ''}` +
-      `${params.loudness ? `&target_loudness=${params.loudness}` : ''}` +
       `${params.popularity ? `&target_popularity=${params.popularity}` : ''}` +
-      `${params.tempo ? `&target_tempo=${params.tempo}` : ''}` +
-      `${params.valence ? `&target_valence=${params.valence}` : ''}`
+      `${params.valence ? `&target_valence=${params.valence}` : ''}` +
+      `${params.instumentalness ? `&target_instrumentalness=${params.instumentalness}` : ''}`
 
       // console.log(params)
-      // console.log(requestUri)
+      console.log(requestUri)
 
       fetch(requestUri, { headers })
         .then(response => response.json())
@@ -125,7 +122,8 @@ function Playlist() {
         "public": false
       })
     }
-    fetch(`https://api.spotify.com/v1/users/${document.cookie.split('=')[2].split(';')[0]}/playlists`, options)
+    //Create playlist
+    fetch(`https://api.spotify.com/v1/users/${document.cookie.split('user-id=')[1].split(';')[0]}/playlists`, options)
         .then(response => response.json())
         .then(
           (result) => {
@@ -136,7 +134,7 @@ function Playlist() {
               ))
             })
 
-            console.log(options)
+            // console.log(options)
             fetch(`https://api.spotify.com/v1/playlists/${result.id}/tracks`, options)
               .then(response => response.json())
               .then(
@@ -156,65 +154,66 @@ function Playlist() {
   }
 
   return (
-    <div className="Playlist">
+      <div className="Playlist">
 
-        <Box display="flex" alignItems="center">
-          <div className="Center">
-            <Button
-              style={{textTransform: 'capitalize'}}
-              color="primary" 
-              variant="contained" 
-              onClick={fetchPlaylist} >
-                {buttonText}
-            </Button>
-          </div>
+          <Box display="flex" alignItems="center">
+            <div className="Center">
+              <Button
+                style={{textTransform: 'capitalize'}}
+                color="primary" 
+                variant="contained"
+                disabled={!params.seed_tracks}
+                onClick={fetchPlaylist} >
+                  {buttonText}
+              </Button>
+            </div>
 
-          <div className="Right">
-            <Tooltip
-              arrow
-              title="Save playlist to Spotify"
-              placement="left"
-              >
-              <span>
-                <IconButton
-                  onClick={savePlaylist}
-                  disabled={!playlist}>
-                  <SaveAltOutlinedIcon style={{height:'1.25em', width:'1.25em'}} />
+            <div className="Right">
+              <Tooltip
+                arrow
+                title="Save playlist to Spotify"
+                placement="left"
+                >
+                <span>
+                  <IconButton
+                    onClick={savePlaylist}
+                    disabled={!playlist}>
+                    <SaveAltOutlinedIcon style={{height:'1.25em', width:'1.25em'}} />
+                  </IconButton>
+                </span>
+              </Tooltip>
+            </div>
+          </Box>
+
+          { playlist ? (
+            <div style={{marginTop:20}}>
+            { playlist.map((track, index) => (
+              <PlaylistElement track={track} key={track.id} color={colors[index % colors.length]}/>
+            ))}
+            </div>
+          ) : (
+            [...Array(10)].map((elem,index) => <Skeleton key={index} height={90} animation={false}/>)                
+          )}
+
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center'
+            }}
+            open={open}
+            autoHideDuration={6000}
+            onClose={handleClose}
+            message="Playlist created!"
+            action={
+              <Fragment>
+                <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                  <CloseIcon fontSize="small" />
                 </IconButton>
-              </span>
-            </Tooltip>
-          </div>
-        </Box>
+              </Fragment>
+            }
+            />
 
-        { playlist ? (
-          <div style={{marginTop:20}}>
-          { playlist.map((track, index) => (
-            <PlaylistElement track={track} key={track.id} color={colors[index % colors.length]}/>
-          ))}
-          </div>
-        ) : (
-          [...Array(10)].map((elem,index) => <Skeleton key={index} height={90} animation={false}/>)                
-        )}
-
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center'
-          }}
-          open={open}
-          autoHideDuration={6000}
-          onClose={handleClose}
-          message="Playlist created!"
-          action={
-            <Fragment>
-              <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-                <CloseIcon fontSize="small" />
-              </IconButton>
-            </Fragment>
-          }
-          />
-
-    </div>
+      </div>
   )
   
 }

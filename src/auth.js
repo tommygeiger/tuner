@@ -1,6 +1,6 @@
 const clientId = '3cf6931c4f974651b57c25157fe28427';
-// const redirectUri = 'http://localhost:3000/';
-const redirectUri = 'https://tommygeiger.com/spotify-react-app/';
+const redirectUri = 'http://localhost:3000/';
+// const redirectUri = 'https://tommygeiger.com/spotify-react-app/';
 const scopes = [
     'user-read-email',
     'playlist-modify-public',

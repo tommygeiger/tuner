@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Autocomplete } from '@material-ui/lab'
 import { TextField } from '@material-ui/core'
 import { SearchContext } from './SearchContext'
@@ -11,11 +11,10 @@ function SearchBar() {
   const headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Authorization': `Bearer ${document.cookie.split('=')[1].split(';')[0]}`
+    'Authorization': `Bearer ${document.cookie.split('access-token=')[1].split(';')[0]}`
   }
 
   const [options, setOptions] = useState([])
-  const { params, setParams } = useContext(SearchContext);
 
   function updateOptions(event, value, reason) {
 
@@ -53,6 +52,9 @@ function SearchBar() {
   }
 
   return (
+    <SearchContext.Consumer>
+      {({params, setParams}) => (
+
       <div className="SearchBar">
         <Autocomplete
           options={options}
@@ -73,27 +75,27 @@ function SearchBar() {
           onInputChange={updateOptions}
           filterOptions={(options, state) => options}
           getOptionSelected={(option, value) => option }
-          renderInput={(params) => <TextField {...params} label="Start with an Artist or Track" variant="outlined"/>}
+          renderInput={(params) => <TextField {...params} label="Pick a seed Song or Artist" variant="outlined"/>}
           onChange={(event, value) => { 
-            //Set the seed values
+            //Set the seed value
             if (value) {
-              switch (value.type){
-                case 'Tracks':
-                  params.seed_tracks = value.id
-                  params.seed_artists = null
-                  break
-                case 'Artists':
-                  params.seed_tracks = null
-                  params.seed_artists = value.id
-                  break
-                default:
-                  break
+              if (value.type === "Tracks"){
+                let temp = {...params}
+                temp.seed_tracks = value.id
+                setParams(temp)
+              } else if (value.type === "Artists"){
+                let temp = {...params}
+                temp.seed_artists = value.id
+                setParams(temp)
               }
             }
           }}
           groupBy={(option) => option.type}
         />
       </div>
+
+      )}
+      </SearchContext.Consumer>
   )
 }
 

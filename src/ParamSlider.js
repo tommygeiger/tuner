@@ -1,7 +1,9 @@
-import React, { useContext, useState } from 'react'
-import { Typography, withStyles, Slider, Tooltip, IconButton, Box, Switch, ClickAwayListener, isWidthDown } from '@material-ui/core'
+import React, { useState } from 'react'
+import { Typography, withStyles, Slider, Tooltip, IconButton, Box, Switch, ClickAwayListener } from '@material-ui/core'
 import { SearchContext } from './SearchContext'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+
 
 
 const ParamTip = withStyles(() => ({
@@ -20,9 +22,19 @@ const ParamTip = withStyles(() => ({
 }))(Tooltip);
 
 
+const customSlider = createMuiTheme({
+  overrides: {
+    MuiSlider: {
+      thumb: {
+        border: "2px solid currentColor",
+      }
+    }
+  }
+});
+
+
 function ParamSlider(props) {
 
-  const { params, setParams } = useContext(SearchContext);
   const [isOn, setSwitch] = useState(false)
   const [value, setValue] = useState(50)
   const [open, setOpen] = useState(false)
@@ -34,23 +46,11 @@ function ParamSlider(props) {
     (open ? setOpen(false) : setOpen(true))
   }
 
-  function handleChange() {
-    //Handle when the switch is checked/unchecked
-    if (isOn) {
-      let temp = {...params}
-      temp[props.param] = null
-      setParams(temp)
-      setSwitch(false)
-    } else {
-      let temp = {...params}
-      temp[props.param] = value
-      setParams(temp)
-      setSwitch(true)
-    }
-  }
-
-
   return (
+    <SearchContext.Consumer>
+    {({params, setParams}) => (
+
+
       <Box display="flex" style={{alignItems:"center", paddingTop:5, paddingRight:20, paddingLeft:5}}>
           
         <ClickAwayListener onClickAway={handleTooltipClose}>
@@ -76,7 +76,7 @@ function ParamSlider(props) {
         
           <Typography
             variant="subtitle1" 
-            style={{minWidth:110, textAlign:"left", textTransform: "capitalize"}}>
+            style={{minWidth:130, textAlign:"left", textTransform: "capitalize"}}>
              {props.param}
           </Typography>
 
@@ -86,31 +86,61 @@ function ParamSlider(props) {
             size="small"
             color="primary"
             checked={isOn}
-            onChange={handleChange}
+            onChange={() => {
+
+              if (isOn) {
+                let temp = {...params}
+                temp[props.param] = null
+                setParams(temp)
+                setSwitch(false)
+              } else {
+                let temp = {...params}
+                temp[props.param] = value
+                setParams(temp)
+                setSwitch(true)
+              }
+
+            }}
             name="checked"
             inputProps={{ 'aria-label': 'switch' }}
           />
         </div>
+        
 
+        <ThemeProvider theme={customSlider}>
           <Slider
-            color="primary"
+            min={1}
+            max={100}
             disabled={!isOn}
             valueLabelDisplay="auto"
-            aria-label={props.param}
-            defaultValue={50}
+            getAriaValueText={() => props.param}
+            value={value}
             onChange={(event, value) => {
-              //Update params
-              let temp = {...params}
-              temp[props.param] = value
-              setParams(temp)
+
               //Update local value
               setValue(value)
+
+              //Update params
+              let temp = {...params}
+              if (props.param === "popularity"){
+                temp[props.param] = value[0] //don't scale popularity
+              } else {
+                temp[props.param] = value[0]/100
+              }
+              setParams(temp)
+              
+              // console.log(params)
             }}
           />
+          </ThemeProvider>
 
-      </Box>    
+      </Box>
+
+      )}
+      </SearchContext.Consumer>
+
   );
   
 }
 
-export default ParamSlider;
+export default ParamSlider
