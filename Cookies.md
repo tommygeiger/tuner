@@ -1,16 +1,8 @@
-# Cookies Policy
+# Cookies
 
-Effective 4/26/2021
+Effective 4/27/2021
 
-By using Tuner, you consent to the use of cookies. Our Cookies Policy explains what cookies are and how we use cookies.
-
-## What are cookies
-
-Cookies are small pieces of text sent by your web browser by a website you visit. A cookie file is stored in your web browser and allows the Service or a third-party to recognize you and make your next visit easier and the Service more useful to you. Cookies can be "persistent" or "session" cookies. We don't use third-party cookies.
-
-## How we use cookies
-
-We use cookies to enable Spotify API requests after authentication. When you use and access the Service, we place the following persistent cookies files in your web browser:
+By using Tuner, you consent to the use of cookies. Cookies are small pieces of data stored in your web browser by a website you visit, and allow websites to remember stateful information during and after a session. We use cookies to enable Spotify API requests after authentication. We don't use third-party cookies. When you use Tuner, we place the following persistent cookies in your web browser:
 
 | Cookie  | Purpose | Expiry | 
 | - | - | - |
