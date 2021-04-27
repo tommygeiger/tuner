@@ -1,9 +1,9 @@
 # Tuner
 
-A React.js app that gives users more control over the Spotify recommendation engine.
+A React app that gives the users more control over the Spotify recommendation engine.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). 
-Currently live (under construction) [here](https://tommygeiger.com/spotify-react-app).
+Live at [tommygeiger.com/tuner](https://tommygeiger.com/tuner).
 
 ## Local Development
 
