@@ -27,4 +27,4 @@ The app should be live at `http://localhost/3000`
 
 ## Building Your Own App
 
-You'll need to create a Spotify app and add your app's credentials to the code. Go to the [Spotify for Developers Dashboard](https://developer.spotify.com/dashboard/) and create an app. Then add `http://localhost:3000/` (and your live site URI, if any) as a Redirect URI. Finally replace `redirectUri` in `auth.js` with your app's Client ID from the Spotify dashboard.
+You'll need to create a Spotify app and add your app's credentials to the code. Go to the [Spotify for Developers Dashboard](https://developer.spotify.com/dashboard/) and create an app. Then add `http://localhost:3000/` (and your live site URI, if any) as a Redirect URI. Finally replace `clientId` in `auth.js` with your app's Client ID from the Spotify dashboard.
