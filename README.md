@@ -1,6 +1,6 @@
-# Tuner, a playlist generator
+# Tuner ### a playlist generator
 
-A React app aimed to give users more control over the Spotify recommendation engine. Live at [tommygeiger.com/tuner](https://tommygeiger.com/tuner).
+A React app aimed to give users more control over the Spotify recommendation engine. Live at [tommygeiger.com/tuner](https://tommygeiger.com/tuner)
 
 ## Local Development
 
