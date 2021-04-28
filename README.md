@@ -1,4 +1,4 @@
-# :control_knobs: Tuner :control_knobs::
+# Tuner: a playlist generator
 
 A React app aimed to give users more control over the Spotify recommendation engine. Live at [tommygeiger.com/tuner](https://tommygeiger.com/tuner).
 
