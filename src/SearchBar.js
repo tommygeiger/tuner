@@ -78,14 +78,17 @@ function SearchBar() {
           renderInput={(params) => <TextField {...params} label="Pick a seed Song or Artist" variant="outlined"/>}
           onChange={(event, value) => { 
             //Set the seed value
+            console.log(value)
             if (value) {
               if (value.type === "Tracks"){
                 let temp = {...params}
+                temp.seed_artists = null
                 temp.seed_tracks = value.id
                 setParams(temp)
               } else if (value.type === "Artists"){
                 let temp = {...params}
                 temp.seed_artists = value.id
+                temp.seed_tracks = null
                 setParams(temp)
               }
             }

@@ -6,7 +6,7 @@ export const defaultParams = {
   acousticness:null,
   danceability:null,
   energy:null,
-  instumentalness:null,
+  instrumentalness:null,
   // liveness:null,
   // loudness:null,
   popularity:null,
