@@ -1,4 +1,4 @@
-# Tuner
+# :level_slider: Tuner :level_slider:
 
 A React app aimed to give users more control over the Spotify recommendation engine. Live at [tommygeiger.com/tuner](https://tommygeiger.com/tuner).
 
