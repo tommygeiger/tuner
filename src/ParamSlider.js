@@ -123,13 +123,12 @@ function ParamSlider(props) {
               //Update params
               let temp = {...params}
               if (props.param === "popularity"){
-                temp[props.param] = value[0] //don't scale popularity
+                temp[props.param] = value //don't scale popularity
               } else {
-                temp[props.param] = value[0]/100
+                temp[props.param] = value/100
               }
               setParams(temp)
-              
-              // console.log(params)
+
             }}
           />
           </ThemeProvider>

@@ -72,6 +72,8 @@ function Playlist() {
   //Function to fetch recommendations via the api
   function fetchPlaylist() {
 
+    // console.log(params)
+
     setButtonText(sayings[Math.floor(Math.random() * sayings.length)])
     
     if (params.seed_albums || params.seed_artists || params.seed_tracks) {
@@ -84,7 +86,7 @@ function Playlist() {
       `${params.energy ? `&target_energy=${params.energy}` : ''}` +
       `${params.popularity ? `&target_popularity=${params.popularity}` : ''}` +
       `${params.valence ? `&target_valence=${params.valence}` : ''}` +
-      `${params.instumentalness ? `&target_instrumentalness=${params.instumentalness}` : ''}`
+      `${params.instrumentalness ? `&target_instrumentalness=${params.instrumentalness}` : ''}`
 
       // console.log(params)
       console.log(requestUri)
@@ -118,8 +120,7 @@ function Playlist() {
       method: 'POST',
       headers: headers,
       body: JSON.stringify({
-        "name": "New Tuner Playlist",
-        "public": false
+        "name": "New Tuner Playlist"
       })
     }
     //Create playlist
@@ -138,7 +139,9 @@ function Playlist() {
             fetch(`https://api.spotify.com/v1/playlists/${result.id}/tracks`, options)
               .then(response => response.json())
               .then(
-                (result) => {},
+                (snapshot) => {
+                  setOpen(true)
+                },
                 (error) => {
                   console.error('Error:', error);
                 }
@@ -149,8 +152,6 @@ function Playlist() {
             console.error('Error:', error);
           }
         )
-        .then(setOpen(true))
-
   }
 
   return (
@@ -162,7 +163,7 @@ function Playlist() {
                 style={{textTransform: 'capitalize'}}
                 color="primary" 
                 variant="contained"
-                disabled={!params.seed_tracks}
+                disabled={!(params.seed_artists || params.seed_tracks)}
                 onClick={fetchPlaylist} >
                   {buttonText}
               </Button>
