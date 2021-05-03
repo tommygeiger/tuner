@@ -27,6 +27,9 @@ const customSlider = createMuiTheme({
     MuiSlider: {
       thumb: {
         border: "2px solid currentColor",
+      },
+      valueLabel: {
+        marginLeft: -4
       }
     }
   }
