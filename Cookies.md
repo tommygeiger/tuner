@@ -7,4 +7,4 @@ By using Tuner, you consent to the use of cookies. Cookies are small pieces of d
 | Cookie  | Purpose | Expiry | 
 | - | - | - |
 | access-token  | Store temporary Spotify access token for API requests | 1 hr |
-| user-id  | Store unique Spotify user id for API requests | 1hr |
+| user-id  | Store unique Spotify user id for API requests | 1 hr |
