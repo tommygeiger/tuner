@@ -120,7 +120,8 @@ function Playlist() {
       method: 'POST',
       headers: headers,
       body: JSON.stringify({
-        "name": "New Tuner Playlist"
+        "name": "New Tuner Playlist",
+        "description": "tommygeiger.com/tuner"
       })
     }
     //Create playlist
