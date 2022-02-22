@@ -9,7 +9,7 @@ If you don't have Node js installed:
 brew install node
 ```
 
-Clone this repo (or fork):
+Clone this repo:
 ```
 git clone https://github.com/tommygeiger/tuner
 cd spotify-react-app
