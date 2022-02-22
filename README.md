@@ -12,7 +12,7 @@ brew install node
 Clone this repo:
 ```
 git clone https://github.com/tommygeiger/tuner
-cd spotify-react-app
+cd tuner
 ```
 
 Make sure `redirectUri` in `src/auth.js` is set to `http://localhost/3000/`
